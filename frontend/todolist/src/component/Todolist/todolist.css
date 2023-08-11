@@ -1,0 +1,52 @@
+.continer-todolist {
+  height: fit-content;
+  margin: 15px;
+  padding: 10px;
+  min-width: 300px;
+}
+
+.header-list {
+  color: rgb(97, 102, 121);
+  font-size: 200 !important;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.circle {
+  background-color: red !important;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.body-section-todolist {
+  grid-column: 3/-1;
+  display: flex;
+  overflow: scroll;
+  height: 84vh;
+}
+
+.content-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.body-section-todolist::-webkit-scrollbar {
+  width: 8px;
+  /* Set the width of the scrollbar */
+}
+
+.body-section-todolist::-webkit-scrollbar-thumb {
+  background-color: #c1bbbb;
+  width: 20px !important;
+  border-radius: 20px;
+  /* Set the scrollbar thumb color */
+}
+
+
+.body-section-todolist::-webkit-scrollbar {
+  height: 10px;
+}

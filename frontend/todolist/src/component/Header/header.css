@@ -1,0 +1,36 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background-color: rgb(44, 44, 56);
+  grid-column: 3/-1;
+  width: 100%;
+  border: rgb(52, 52, 64) 1px solid
+}
+
+.logo {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.right-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-add-task {
+  border: none;
+  background-color: rgb(100, 95, 198);
+  padding: 13px 20px;
+  border-radius: 20px;
+  color: white;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.fa-ellipsis-v {
+  font-size: 20px;
+  cursor: pointer;
+}

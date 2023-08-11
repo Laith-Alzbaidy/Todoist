@@ -1,0 +1,54 @@
+.container-form-add-list {
+  margin-top: 60px;
+
+}
+
+.new-column {
+  background-color: rgb(44, 44, 56);
+  margin-top: 60px;
+  margin-left: 20px;
+  height: 400px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+}
+
+
+.form-add-list {
+  background-color: rgb(44, 44, 56);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+
+
+.icon-add-remove {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-add-remove button {
+  border: none;
+  background-color: rgb(100, 95, 198);
+  padding: 5px 10px;
+}
+
+
+.input-name-list {
+  padding: 5px;
+  background-color: white;
+  border: none;
+  outline: none;
+}
+
+.fa-xmark {
+  cursor: pointer;
+}

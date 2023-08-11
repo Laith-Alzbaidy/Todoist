@@ -1,0 +1,76 @@
+.form-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 10px;
+  color: white;
+  gap: 20px;
+  font-size: 13px;
+}
+
+.lable-input-dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 7px;
+
+}
+
+.lable-input-dialog label {
+  color: white;
+}
+
+.lable-input-dialog input {
+  width: 100% !important;
+  padding: 10px;
+  background: none;
+  outline: none;
+  border: 1px solid gray;
+  color: white;
+}
+
+
+.Subtasks-dialog {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-dialog {
+  background-color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.DialogTitle {
+  margin: 0;
+  color: white;
+}
+
+#dialog {
+  width: 500px;
+  background-color: rgb(44, 44, 56);
+}
+
+.fa-xmark {
+  color: black;
+  font-size: 20px;
+}
+
+.Select-option-dialog {
+  padding: 10px;
+  background-color: rgb(44, 44, 56);
+  color: white;
+}
+
+.btnCreateTask {
+  background-color: rgb(100, 95, 198);
+}
+
+
+.icon-remove-dialog {
+  color: white;
+}

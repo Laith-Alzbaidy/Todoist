@@ -1,0 +1,51 @@
+/* Sidebar.css */
+.sidebar {
+  background-color: rgb(44, 44, 56);
+  color: #fff;
+  top: 0;
+  left: 0;
+  padding-top: 20px;
+  grid-column: 1/3;
+  grid-row: 1/-1;
+  height: 100vh;
+  border: rgb(52, 52, 64) 2px solid;
+  width: 300px;
+}
+
+.container-content {
+  margin-top: 100px;
+}
+
+.container-content {
+  font-size: 16px;
+  color: rgb(97, 102, 121);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: start;
+  padding: 15px;
+  width: 90%;
+  transition: 0.2s;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+
+
+.wrapper:hover {
+  background-color: rgb(100, 95, 198);
+  border-radius: 0px 50px 50px 0px;
+  color: white
+}
+
+.header-sidebar {
+  display: flex;
+  gap: 5px;
+  padding: 15px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}

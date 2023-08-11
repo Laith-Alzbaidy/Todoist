@@ -1,0 +1,27 @@
+/* #dialog P {
+  font-size: 13px;
+  color: rgb(97, 102, 121);
+}
+
+
+.Containar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.Header-dilaog-colomn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+
+.form-dialog {
+  padding: 0;
+}
+
+.icon-dialog {
+  color: rgb(97, 102, 121);
+  font-size: 30px;
+} */

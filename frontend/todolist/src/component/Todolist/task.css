@@ -1,0 +1,19 @@
+.task {
+  background-color: rgb(44, 44, 56);
+  margin: 10px 0;
+  padding: 20px 25px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.task h3 {
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.substasks {
+  color: rgb(97, 102, 121);
+  display: flex;
+  gap: 3px;
+}

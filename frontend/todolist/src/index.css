@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&family=Poppins:wght@300;400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(33, 33, 45);
+  display: grid;
+  color: white;
+  font-family: 'Poppins', sans-seri;
+  overflow-x: hidden;
+}
+
+
+.parent {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, auto);
+}
+
+
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(113, 113, 113);
+  border-radius: 10px;
+} */
