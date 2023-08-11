@@ -8,8 +8,6 @@ import Task from "../Todolist/task";
 
 export default function FormDialog({ task }) {
   const [open, setOpen] = useState(false);
-
-  console.log(task);
   const handleClickOpen = () => {
     setOpen(true);
   };

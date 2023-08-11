@@ -1,18 +1,24 @@
 import "./todolist.css";
 import Task from "./task";
 import { TodolistContext } from "../context";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Dialog2 from "../Dialog2/dialog2";
-function Todolist({ title }) {
+import { green } from "@mui/material/colors";
+function Todolist({ list }) {
   const { tasks } = useContext(TodolistContext);
+
   return (
     <section className="continer-todolist">
       <div className="header-list">
-        <span className="circle"></span>
+        <span
+          style={{ backgroundColor: `${list.color}` }}
+          className="circle"
+        ></span>
         <span>
-          {title}
-          {`(${tasks.length})`}
+          {list.title}
+          {`(${list.length})`}
         </span>
+        <i className="fa-solid fa-xmark icon-remove-dialog"></i>{" "}
       </div>
       <div className="content-list">
         {tasks.map((task) => {

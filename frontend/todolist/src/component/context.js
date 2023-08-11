@@ -1,40 +1,90 @@
-import { createContext, useState, useEffect } from "react";
-// import axios from "axios";
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
+
 export const TodolistContext = createContext();
 
 function TodolistProvider(props) {
-  const [allTitleList, AllsetTitleList] = useState([]);
-  const [tasks, setTask] = useState([]);
-  // const [database, setdatabase] = useState([]);
-  const addTitleList = (title) => {
-    AllsetTitleList([...allTitleList, title]);
+  // State to hold lists and tasks
+  const [lists, setAllTitleList] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  // Fetch lists and tasks when the component mounts
+  useEffect(() => {
+    getLists();
+    getTasks();
+  }, []);
+
+  // Fetch lists data from the API
+  const getLists = async () => {
+    try {
+      const response = await axios.get("/api/v1/todolist");
+      setAllTitleList(response.data.data);
+    } catch (error) {
+      console.log("Error fetching lists:", error);
+    }
   };
 
-  const addTask = (newTask) => {
-    setTask([...tasks, newTask]);
+  // Create a new list
+  const createList = async (title) => {
+    try {
+      const response = await axios.post("/api/v1/todolist", { title });
+      setAllTitleList([...lists, response.data.data]);
+    } catch (error) {
+      console.log("Error creating list:", error);
+    }
   };
 
-  //get title list
-  // const GetTask = async () => {
-  //   try {
-  //     const respons = await axios.get("/api/v1/todolist");
-  //     console.log("reapost", respons);
-  //   } catch (err) {
-  //     console.log("err");
-  //   }
-  // };
-  // get list database
+  // Fetch tasks data from the API
+  const getTasks = async () => {
+    try {
+      const response = await axios.get("/api/v1/todotask");
+      setTasks(response.data.data);
+    } catch (error) {
+      console.log("Error fetching tasks:", error);
+    }
+  };
 
+  // Create a new task
+  const createTask = async (task) => {
+    try {
+      const response = await axios.post("/api/v1/todotask", task);
+      setTasks([...tasks, response.data.data]);
+    } catch (error) {
+      console.log("Error creating task:", error);
+    }
+  };
+
+  const deleteTask = async (taskId) => {
+    try {
+      // Send the delete request
+      await axios.delete(`/api/v1/todotask/${taskId}`);
+
+      // updated tasks data and update the state
+      const updateTask = tasks.filter((task) => task._id !== taskId);
+      setTasks(updateTask);
+
+      console.log("Task deleted successfully");
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  // Context data that will be provided to consuming components
   const data = {
-    allTitleList,
-    addTitleList,
-    addTask,
+    lists,
     tasks,
+    createList,
+    createTask,
+    getLists,
+    deleteTask,
   };
+
   return (
+    // Provide the context data to consuming components
     <TodolistContext.Provider value={data}>
       {props.children}
     </TodolistContext.Provider>
   );
 }
+
 export default TodolistProvider;

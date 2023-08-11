@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./addlist.css";
 import { TodolistContext } from "../context";
 function AddList() {
-  const { addTitleList } = useContext(TodolistContext);
+  const { createList, getLists } = useContext(TodolistContext);
   const [showAdd, setShowAdd] = useState(true);
   const [title, setTitle] = useState("");
 
@@ -17,7 +17,7 @@ function AddList() {
 
   const handleFormAddList = (event) => {
     event.preventDefault();
-    addTitleList(title);
+    createList(title);
   };
 
   return (

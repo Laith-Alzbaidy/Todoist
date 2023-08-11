@@ -4,6 +4,7 @@
   padding: 20px 25px;
   border-radius: 10px;
   width: 100%;
+  word-break: break-all;
 }
 
 .task h3 {
@@ -16,4 +17,9 @@
   color: rgb(97, 102, 121);
   display: flex;
   gap: 3px;
+}
+
+.header-task {
+  display: flex;
+  justify-content: space-between;
 }

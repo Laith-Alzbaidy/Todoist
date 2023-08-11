@@ -11,7 +11,7 @@ import { TodolistContext } from "../context";
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
-  const { addTask } = useContext(TodolistContext);
+  const { createTask, tasks, lists } = useContext(TodolistContext);
 
   const [task, setTask] = useState({
     title: "",
@@ -29,7 +29,7 @@ export default function FormDialog() {
   const handleForm = (event) => {
     event.preventDefault();
     console.log(task);
-    addTask(task);
+    createTask(task);
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -89,9 +89,9 @@ export default function FormDialog() {
             <div className="lable-input-dialog">
               <select className="Select-option-dialog" name="" id="">
                 <option value="--">--</option>
-                <option value="Todo">Todo</option>
-                <option value="Done">Done</option>
-                <option value="Doing">Doing</option>
+                {lists.map((list) => {
+                  return <option value="Todo">{list.title}</option>;
+                })}
               </select>
             </div>
             <button className="btn-dialog btnCreateTask">Create Task</button>

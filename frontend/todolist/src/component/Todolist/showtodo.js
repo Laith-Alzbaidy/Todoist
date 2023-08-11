@@ -4,14 +4,13 @@ import { useContext, useState } from "react";
 import { TodolistContext } from "../context";
 
 function ShowTodo() {
-  const { allTitleList } = useContext(TodolistContext);
-  // Define a function to add a new title to the list
+  const { lists } = useContext(TodolistContext);
+
   return (
     <>
       <div className="body-section-todolist">
-        {allTitleList.map((title) => {
-          <AddList />;
-          return <Todolist title={title} />;
+        {lists.map((list) => {
+          return <Todolist list={list} />;
         })}
         <AddList />
       </div>

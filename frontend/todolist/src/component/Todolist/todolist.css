@@ -15,7 +15,7 @@
 }
 
 .circle {
-  background-color: red !important;
+  /* background-color: red; */
   display: inline-block;
   width: 15px;
   height: 15px;
