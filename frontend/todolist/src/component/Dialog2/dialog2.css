@@ -25,3 +25,15 @@
   color: rgb(97, 102, 121);
   font-size: 30px;
 }
+
+.icon-remove-dialog2 {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: white;
+
+}
+
+.continer-task-delete {
+  position: relative;
+}

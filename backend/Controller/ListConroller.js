@@ -20,10 +20,10 @@ exports.createList = async (req, res) => {
 // Get all lists
 exports.getAllList = async (req, res) => {
   try {
-    const list = await List.find();
+    const lists = await List.find().populate("taskList"); // Populate the taskList field
     res.status(200).json({
       status: "success",
-      data: list,
+      data: lists,
     });
   } catch (err) {
     res.status(500).json({
@@ -37,7 +37,7 @@ exports.getAllList = async (req, res) => {
 // Get a specific list by ID
 exports.getSpecificList = async (req, res) => {
   try {
-    const list = await List.findById(req.params.id);
+    const list = await List.findById(req.params.id).populate("taskList"); // Populate the taskList field
     res.status(200).json({
       status: "success",
       data: list,

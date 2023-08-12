@@ -11,7 +11,7 @@ import { TodolistContext } from "../context";
 
 export default function FormDialog() {
   const [open, setOpen] = useState(false);
-  const { createTask, tasks, lists } = useContext(TodolistContext);
+  const { tasks, lists, createTask } = useContext(TodolistContext);
 
   const [task, setTask] = useState({
     title: "",

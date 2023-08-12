@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import Dialog2 from "../Dialog2/dialog2";
 import { green } from "@mui/material/colors";
 function Todolist({ list }) {
-  const { tasks } = useContext(TodolistContext);
+  const { tasks, createTask, lists } = useContext(TodolistContext);
 
   return (
     <section className="continer-todolist">

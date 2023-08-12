@@ -9,11 +9,11 @@ const TaskSchema = mongoose.Schema({
     type: String,
     required: [true, "description is required"],
   },
-  subtask: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subtask" }],
-  // list: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
+  // subtask: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subtask" }],
+  listId: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
   completed: { type: Boolean, default: false },
 });
 
-const Task = mongoose.model("task", TaskSchema);
+const Task = mongoose.model("Task", TaskSchema);
 
 module.exports = Task;
