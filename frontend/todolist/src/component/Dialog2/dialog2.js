@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Task from "../Todolist/task";
 import { TodolistContext } from "../context";
-export default function FormDialog({ task }) {
+export default function FormDialog({ task, list }) {
   const { deleteTask } = useContext(TodolistContext);
 
   const [open, setOpen] = useState(false);
@@ -21,14 +21,16 @@ export default function FormDialog({ task }) {
   return (
     <section className="section-Dialog">
       <div className="continer-task-delete">
-        <i
-          onClick={() => {
-            deleteTask(task._id);
-          }}
-          className="fa-solid fa-xmark icon-remove-dialog2"
-        ></i>
+        {task && (
+          <i
+            onClick={() => {
+              deleteTask(task._id);
+            }}
+            className="fa-solid fa-xmark icon-remove-dialog2"
+          ></i>
+        )}
         <div onClick={handleClickOpen}>
-          <Task task={task} />
+          <Task task={task} list={list} />
         </div>
       </div>
       <Dialog open={open} onClose={handleClose}>

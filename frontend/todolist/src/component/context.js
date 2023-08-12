@@ -45,9 +45,12 @@ function TodolistProvider(props) {
   };
 
   // Create a new task
-  const createTask = async (task) => {
+  const createTask = async (task, listId) => {
     try {
-      const response = await axios.post("/api/v1/todotask", task);
+      const response = await axios.post(`api/v1/todolist/${listId}/tasks`, {
+        ...task,
+        listId,
+      });
       setTasks([...tasks, response.data.data]);
     } catch (error) {
       console.log("Error creating task:", error);

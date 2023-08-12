@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import Dialog2 from "../Dialog2/dialog2";
 import { green } from "@mui/material/colors";
 function Todolist({ list }) {
-  const { tasks, createTask, lists } = useContext(TodolistContext);
+  const { tasks } = useContext(TodolistContext);
 
   return (
     <section className="continer-todolist">
@@ -20,10 +20,13 @@ function Todolist({ list }) {
         </span>
         <i className="fa-solid fa-xmark icon-remove-dialog"></i>{" "}
       </div>
+
       <div className="content-list">
-        {tasks.map((task) => {
-          return <Dialog2 task={task} />;
-        })}
+        {tasks
+          .filter((task) => task.listId === list._id)
+          .map((task) => {
+            return <Dialog2 key={task._id} task={task} list={list} />;
+          })}
       </div>
     </section>
   );

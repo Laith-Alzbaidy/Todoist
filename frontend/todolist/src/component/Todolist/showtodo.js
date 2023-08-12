@@ -10,7 +10,7 @@ function ShowTodo() {
     <>
       <div className="body-section-todolist">
         {lists.map((list) => {
-          return <Todolist list={list} />;
+          return <Todolist key={list._id} list={list} />;
         })}
         <AddList />
       </div>

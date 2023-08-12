@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import "./addlist.css";
 import { TodolistContext } from "../context";
 function AddList() {
-  const { createList, getLists } = useContext(TodolistContext);
+  const { createList } = useContext(TodolistContext);
   const [showAdd, setShowAdd] = useState(true);
   const [title, setTitle] = useState("");
 

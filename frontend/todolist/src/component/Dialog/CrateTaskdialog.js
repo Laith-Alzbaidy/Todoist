@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import "./dialog.css";
+import "./CrateTaskdialog.css";
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -10,14 +10,20 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { TodolistContext } from "../context";
 
 export default function FormDialog() {
+  // State for controlling the dialog open/close
   const [open, setOpen] = useState(false);
-  const { tasks, lists, createTask } = useContext(TodolistContext);
 
+  // Context for managing tasks and lists
+  const { lists, createTask } = useContext(TodolistContext);
+
+  // State for selected list ID and task details
+  const [listId, setSelectedListId] = useState("");
   const [task, setTask] = useState({
     title: "",
     description: "",
   });
 
+  // Update task details when inputs change
   const GetTask = (event) => {
     const { name, value } = event.target;
     setTask((prevTask) => ({
@@ -26,25 +32,38 @@ export default function FormDialog() {
     }));
   };
 
+  // Update selected list ID when dropdown selection changes
+  const handleListSelect = (event) => {
+    setSelectedListId(event.target.value);
+    // setTask({ ...task, event.target.value });
+
+    console.log("----------------", listId);
+  };
+
+  // Handle form submission
   const handleForm = (event) => {
     event.preventDefault();
     console.log(task);
-    createTask(task);
+    createTask(task, listId); // Pass both selectedListId and task
+    handleClose();
   };
+
+  // Open the dialog
   const handleClickOpen = () => {
     setOpen(true);
   };
 
+  // Close the dialog
   const handleClose = () => {
     setOpen(false);
   };
-  <button className="btn-add-task">+Add New Task</button>;
 
   return (
     <section className="section-Dialog">
       <button className="btn-add-task" onClick={handleClickOpen}>
         +Add New Task
       </button>
+      {/* Dialog component */}
       <Dialog open={open} onClose={handleClose}>
         <DialogContent id="dialog">
           <DialogTitle className="DialogTitle">Add New Task</DialogTitle>
@@ -86,14 +105,23 @@ export default function FormDialog() {
             </div>
             <Button className="btn-dialog">Add New Subtask</Button>
 
+            {/* Dropdown for selecting a list */}
             <div className="lable-input-dialog">
-              <select className="Select-option-dialog" name="" id="">
+              <select
+                className="Select-option-dialog"
+                onChange={handleListSelect}
+                value={listId}
+              >
                 <option value="--">--</option>
-                {lists.map((list) => {
-                  return <option value="Todo">{list.title}</option>;
-                })}
+                {lists.map((list) => (
+                  <option key={list._id} value={list._id} name={list.title}>
+                    {list.title}
+                  </option>
+                ))}
               </select>
             </div>
+
+            {/* Button to create the task */}
             <button className="btn-dialog btnCreateTask">Create Task</button>
           </form>
           <DialogContentText></DialogContentText>

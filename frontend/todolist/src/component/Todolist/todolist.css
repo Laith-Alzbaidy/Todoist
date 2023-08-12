@@ -35,7 +35,7 @@
 }
 
 .body-section-todolist::-webkit-scrollbar {
-  width: 8px;
+  width: 0;
   /* Set the width of the scrollbar */
 }
 
