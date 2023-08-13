@@ -1,6 +1,6 @@
 const List = require("../model/listModel"); // Import your List model
 
-// Create a new list
+// ------- Create a new list-------------------------------------------------------------------------------------------------------//
 exports.createList = async (req, res) => {
   try {
     const list = await List.create(req.body);
@@ -17,7 +17,7 @@ exports.createList = async (req, res) => {
   }
 };
 
-// Get all lists
+// -------Get all lists-------------------------------------------------------------------------------------------------------//
 exports.getAllList = async (req, res) => {
   try {
     const lists = await List.find().populate("taskList"); // Populate the taskList field
@@ -34,7 +34,7 @@ exports.getAllList = async (req, res) => {
   }
 };
 
-// Get a specific list by ID
+// -------Get  Specific List by ID-------------------------------------------------------------------------------------------------------//
 exports.getSpecificList = async (req, res) => {
   try {
     const list = await List.findById(req.params.id).populate("taskList"); // Populate the taskList field

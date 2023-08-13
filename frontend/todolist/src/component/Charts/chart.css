@@ -1,0 +1,16 @@
+.Chart-Container {
+  grid-column: 3/-1;
+  height: 500px;
+  justify-content: center;
+  width: 80% !important;
+  margin: auto !important;
+  margin-top: 100px !important;
+}
+
+
+
+canvas {
+  height: 100% !important;
+  width: 100% !important;
+  margin: auto !important;
+}

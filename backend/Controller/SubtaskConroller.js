@@ -1,20 +1,6 @@
 const Subtask = require("../model/subtaskModel");
-// exports.createSubTask = async (req, res) => {
-//   try {
-//     const subtask = await Subtask.create(req.body);
-//     res.status(201).json({
-//       status: "sucsess",
-//       data: subtask,
-//     });
-//   } catch (err) {
-//     res.status(404).json({
-//       status: "sucsess",
-//       massage: err,
-//     });
-//   }
-// };
 
-// Get all lists
+// ---- Get all lists-----------------------------------------------------------------------------------------------------------//
 exports.getAllSubtask = async (req, res) => {
   try {
     const subtask = await Subtask.find();
@@ -32,7 +18,8 @@ exports.getAllSubtask = async (req, res) => {
   }
 };
 
-// Get a specific Task by ID
+// ----Get a specific Task by ID-----------------------------------------------------------------------------------------------------------//
+
 exports.getSpecificSubTask = async (req, res) => {
   try {
     const subtask = await Subtask.findById(req.params.id);
@@ -48,7 +35,7 @@ exports.getSpecificSubTask = async (req, res) => {
     });
   }
 };
-// ------------------------------------------------------------------
+// ----create Subtask-----------------------------------------------------------------------------------------------------------//
 
 exports.createSubtask = async (req, res) => {
   const { taskId, subtaskTitle } = req.body;
@@ -71,6 +58,8 @@ exports.createSubtask = async (req, res) => {
   }
 };
 
+// -------update subtask-------------------------------------------------------------------------------------------------------//
+
 exports.updateSubtask = async (req, res) => {
   try {
     const { subtaskId, completed } = req.body;
@@ -91,40 +80,3 @@ exports.updateSubtask = async (req, res) => {
     });
   }
 };
-
-// exports.deleteSubtask = async (req, res) => {
-//   try {
-//     const subtask = await Subtask.findByIdAndDelete(req.params.id);
-//     res.status(200).json({
-//       status: "success",
-//       data: null,
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       status: "error",
-//       message: "Internal server error",
-//       error: err.message,
-//     });
-//   }
-// };
-
-// --------------------------------------
-// exports.createSubtaskInTask = async (req, res) => {
-//   try {
-//     const taskId = req.params.id; // Assuming listId is passed in the URL parameter
-//     const subtask = req.body;
-
-//     // Create the task associated with the specific listId
-//     const newsubtask = await Subtask.create({ ...subtask, taskId });
-
-//     res.status(201).json({
-//       status: "success",
-//       data: newsubtask,
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       status: "failed",
-//       message: err.message,
-//     });
-//   }
-// };

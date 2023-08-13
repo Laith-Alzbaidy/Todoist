@@ -1,6 +1,8 @@
-const Task = require("../model/taskModel"); // Import your Task model
-const Subtask = require("../model/subtaskModel");
-// Create a new Task
+const Task = require("../model/taskModel"); // Import  Task model
+const Subtask = require("../model/subtaskModel"); //Import  Subtask model
+const List = require("../model/listModel"); // Import  List model
+
+// -------Create a new Task--------------------------------------------------------------------------------------//
 exports.createTask = async (req, res) => {
   try {
     const task = await Task.create(req.body);
@@ -17,7 +19,7 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// Get all Tasks
+// ------- Get all Tasks--------------------------------------------------------------------------------------//
 exports.getAllTask = async (req, res) => {
   try {
     const task = await Task.find();
@@ -26,7 +28,7 @@ exports.getAllTask = async (req, res) => {
       data: task,
     });
   } catch (err) {
-    res.status(500).json({
+    res.status(404).json({
       status: "error",
       message: "Internal server error",
       error: err.message,
@@ -34,7 +36,7 @@ exports.getAllTask = async (req, res) => {
   }
 };
 
-// Get a specific Task by ID
+// -------Get a specific Task by ID--------------------------------------------------------------------------------------//
 exports.getSpecificTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -43,7 +45,7 @@ exports.getSpecificTask = async (req, res) => {
       data: task,
     });
   } catch (err) {
-    res.status(500).json({
+    res.status(404).json({
       status: "error",
       message: "Internal server error",
       error: err.message,
@@ -51,7 +53,7 @@ exports.getSpecificTask = async (req, res) => {
   }
 };
 
-// Get a specific Task by ID
+// -------Delete a specific Task by ID--------------------------------------------------------------------------------------//
 exports.deleteTask = async (req, res) => {
   try {
     const taskId = req.params.id;
@@ -62,7 +64,7 @@ exports.deleteTask = async (req, res) => {
       data: null,
     });
   } catch (err) {
-    res.status(500).json({
+    res.status(404).json({
       status: "error",
       message: "Internal server error",
       error: err.message,
@@ -70,15 +72,13 @@ exports.deleteTask = async (req, res) => {
   }
 };
 
-// -----------------------------------------------------------
-// Assuming you have imported the necessary models (Task and Subtask) properly
-
+// -------Create Task in List-------------------------------------------------------------------------------------------------------//
 exports.createTaskInList = async (req, res) => {
   const { title, description } = req.body;
   const listId = req.params.id; // Extract title and description from the request body
   try {
     // Create the main task
-    const task = await Task.create({
+    const newTask = await Task.create({
       title,
       description,
       listId,
@@ -86,45 +86,22 @@ exports.createTaskInList = async (req, res) => {
 
     // Create the associated subtask
     const subtask = await Subtask.create({
-      taskId: task._id, // Link the subtask to the task
+      taskId: newTask._id, // Link the subtask to the task
     });
 
+    // Set Task to inside List
+    const updateTasks = await List.findById(listId);
+    updateTasks.taskList.push(newTask._id);
+    updateTasks.save();
+
     res.status(201).json({
-      task: task,
+      task: newTask,
       subtask: subtask,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      error: "An error occurred while creating the task and subtask.",
+    res.status(404).json({
+      massage: err,
     });
   }
 };
-
-// try {
-//   const listId = req.params.id; // Assuming listId is passed in the URL parameter
-//   const task = req.body;
-//   const { substask } = req.body;
-
-//   // Create the task associated with the specific listId
-//   const createdTask = await Task.create({ ...task, listId });
-//   const getSubttask = await Subtask.create(substask);
-
-//   const subtask = getSubttask.map((subtask) => {
-//     return subtask._id;
-//   });
-//   await Task.updateOne(
-//     { _id: createdTask._id },
-//     { $push: { subtaskId: subtask } }
-//   );
-
-//   res.status(201).json({
-//     status: "success",
-//     data: createdTask,
-//   });
-// } catch (err) {
-//   res.status(400).json({
-//     status: "failed",
-//     message: err.message,
-//   });
-// }

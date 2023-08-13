@@ -93,6 +93,7 @@ function TodolistProvider(props) {
       // Update the tasks state with the new task
       setTasks([...tasks, taskResponse.data.task]);
 
+      getLists();
       Getsubtask();
     } catch (error) {
       console.error("Error creating Task and Subtask:", error);
