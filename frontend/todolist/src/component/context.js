@@ -7,6 +7,15 @@ function TodolistProvider(props) {
   // State to hold lists and tasks
   const [lists, setAllTitleList] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [listId, setListCurrent] = useState("");
+  const [subtasks, setSubTasks] = useState([]);
+  // const [taskId, setTaskId] = useState("");
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    status: "",
+  });
+  const [subtask, setSubtask] = useState("");
 
   // Fetch lists and tasks when the component mounts
   useEffect(() => {
@@ -45,15 +54,47 @@ function TodolistProvider(props) {
   };
 
   // Create a new task
-  const createTask = async (task, listId) => {
+
+  // const createTask = async (task) => {
+  //   console.log(listId);
+  //   try {
+  //     const response = await axios.post(`/api/v1/todoTask/${listId}/tasks`, {
+  //       ...task,
+  //       listId,
+  //       // substask: subtask,
+  //     });
+  //     console.log("---------------", subtasks);
+  //     setTasks([...tasks, response.data.data]);
+  //   } catch (error) {
+  //     console.log("Error creating task:", error);
+  //   }
+  // };
+
+  const createTask = async (task) => {
+    console.log(tasks);
     try {
-      const response = await axios.post(`api/v1/todolist/${listId}/tasks`, {
-        ...task,
-        listId,
+      // Create the main task
+      const taskResponse = await axios.post(
+        `/api/v1/todoTask/${listId}/tasks`,
+        task,
+        listId
+      );
+
+      // Create the associated subtask
+      const subtaskResponse = await axios.post(`/api/v1/todoTask/subtask`, {
+        taskId: taskResponse.data.task._id,
+        subtaskTitle: subtask,
       });
-      setTasks([...tasks, response.data.data]);
+
+      console.log("Created Task:", taskResponse.data.task);
+      console.log("Created Subtask:", subtaskResponse.data.subtask);
+
+      // Update the tasks state with the new task
+      setTasks([...tasks, taskResponse.data.task]);
+
+      Getsubtask();
     } catch (error) {
-      console.log("Error creating task:", error);
+      console.error("Error creating Task and Subtask:", error);
     }
   };
 
@@ -62,15 +103,51 @@ function TodolistProvider(props) {
       // Send the delete request
       await axios.delete(`/api/v1/todotask/${taskId}`);
 
+      // await axios.delete(`/api/v1/subtask/${subtaskId}`);
       // updated tasks data and update the state
-      const updateTask = tasks.filter((task) => task._id !== taskId);
-      setTasks(updateTask);
+      const updatedTasks = tasks.filter((task) => task._id !== taskId);
+      setTasks(updatedTasks);
 
-      console.log("Task deleted successfully");
+      // console.log("Task deleted successfully");
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
+
+  const getIdlist = (listId) => {
+    const selectedList = lists.find(
+      (list) => list._id === listId && list.title === task.status
+    );
+    if (selectedList) {
+      // console.log(selectedList);
+      setListCurrent(selectedList._id);
+    }
+  };
+
+  // Get subtasks
+  const Getsubtask = async () => {
+    try {
+      const response = await axios.get("/api/v1/subtask/");
+      // console.log(response.data.data);
+      setSubTasks(response.data.data);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //create SubTask
+  // const createSubTask = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `/api/v1/todotask/${taskId}/subtask`,
+  //       subtask
+  //     );
+  //     console.log(response.data.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
   // Context data that will be provided to consuming components
   const data = {
@@ -80,6 +157,14 @@ function TodolistProvider(props) {
     createTask,
     getLists,
     deleteTask,
+    getIdlist,
+    setTask,
+    task,
+    subtasks,
+    setSubtask,
+    setSubTasks,
+    subtask,
+    // GetTaskId,
   };
 
   return (

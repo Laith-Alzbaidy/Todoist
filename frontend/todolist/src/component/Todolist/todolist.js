@@ -7,6 +7,9 @@ import { green } from "@mui/material/colors";
 function Todolist({ list }) {
   const { tasks } = useContext(TodolistContext);
 
+  // Filter tasks belonging to the current list
+  const tasksForCurrentList = tasks.filter((task) => task.listId === list._id);
+
   return (
     <section className="continer-todolist">
       <div className="header-list">
@@ -16,7 +19,7 @@ function Todolist({ list }) {
         ></span>
         <span>
           {list.title}
-          {`(${list.length})`}
+          {`(${tasksForCurrentList.length})`}
         </span>
         <i className="fa-solid fa-xmark icon-remove-dialog"></i>{" "}
       </div>

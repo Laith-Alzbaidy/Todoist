@@ -7,11 +7,13 @@ const TaskSchema = mongoose.Schema({
   },
   description: {
     type: String,
-    required: [true, "description is required"],
+    // required: [true, "description is required"],
   },
-  // subtask: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subtask" }],
+  subtaskId: { type: mongoose.Schema.Types.ObjectId, ref: "Subtask" },
   listId: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
+  subtask: { type: String },
   completed: { type: Boolean, default: false },
+  status: { type: String },
 });
 
 const Task = mongoose.model("Task", TaskSchema);

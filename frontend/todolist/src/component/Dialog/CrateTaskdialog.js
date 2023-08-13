@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import "./CrateTaskdialog.css";
 import * as React from "react";
 import Button from "@mui/material/Button";
@@ -14,14 +14,24 @@ export default function FormDialog() {
   const [open, setOpen] = useState(false);
 
   // Context for managing tasks and lists
-  const { lists, createTask } = useContext(TodolistContext);
+  const {
+    lists,
+    createTask,
+    getIdlist,
+    task,
+    setTask,
+    subtask,
+    createSubTask,
+    setSubTasks,
+    subtasks,
+    setSubtask,
+  } = useContext(TodolistContext);
 
+  const GetSubtaskSolo = (event) => {
+    setSubtask(event.target.value);
+    console.log(event.target.value);
+  };
   // State for selected list ID and task details
-  const [listId, setSelectedListId] = useState("");
-  const [task, setTask] = useState({
-    title: "",
-    description: "",
-  });
 
   // Update task details when inputs change
   const GetTask = (event) => {
@@ -32,20 +42,11 @@ export default function FormDialog() {
     }));
   };
 
-  // Update selected list ID when dropdown selection changes
-  const handleListSelect = (event) => {
-    setSelectedListId(event.target.value);
-    // setTask({ ...task, event.target.value });
-
-    console.log("----------------", listId);
-  };
-
   // Handle form submission
   const handleForm = (event) => {
     event.preventDefault();
     console.log(task);
-    createTask(task, listId); // Pass both selectedListId and task
-    handleClose();
+    createTask(task); // Pass both selectedListId and task
   };
 
   // Open the dialog
@@ -64,7 +65,11 @@ export default function FormDialog() {
         +Add New Task
       </button>
       {/* Dialog component */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}>
+        <i
+          className="fa-solid fa-xmark icon-remove-dialog close-dialog"
+          onClick={handleClose}
+        ></i>
         <DialogContent id="dialog">
           <DialogTitle className="DialogTitle">Add New Task</DialogTitle>
           <form onSubmit={handleForm} action="" className="form-dialog">
@@ -95,30 +100,45 @@ export default function FormDialog() {
             <div className="lable-input-dialog">
               <label>Subtasks</label>
               <div className="Subtasks-dialog">
-                <input type="text" placeholder="e.g. Make coffee" />
+                <input
+                  type="text"
+                  placeholder="e.g. Make coffee"
+                  onChange={(e) => GetSubtaskSolo(e)}
+                  name="title"
+                />
                 <i className="fa-solid fa-xmark icon-remove-dialog"></i>
               </div>
-              <div className="Subtasks-dialog">
+              {/* <div className="Subtasks-dialog">
                 <input type="text" placeholder="e.g. Make coffee" />
                 <i className="fa-solid fa-xmark icon-remove-dialog"></i>
-              </div>
+              </div> */}
             </div>
-            <Button className="btn-dialog">Add New Subtask</Button>
+            <Button onClick={createSubTask} className="btn-dialog">
+              Add New Subtask
+            </Button>
 
             {/* Dropdown for selecting a list */}
             <div className="lable-input-dialog">
-              <select
-                className="Select-option-dialog"
-                onChange={handleListSelect}
-                value={listId}
-              >
-                <option value="--">--</option>
-                {lists.map((list) => (
-                  <option key={list._id} value={list._id} name={list.title}>
-                    {list.title}
-                  </option>
-                ))}
-              </select>
+              {
+                <select
+                  className="Select-option-dialog"
+                  onChange={GetTask}
+                  value={task.status}
+                  name="status"
+                  // onClick={GetTaskId}
+                >
+                  <option value="--">--</option>
+                  {lists.map((list) => (
+                    <option
+                      onSelect={getIdlist(list._id)}
+                      key={list._id}
+                      value={list.title}
+                    >
+                      {list.title}
+                    </option>
+                  ))}
+                </select>
+              }
             </div>
 
             {/* Button to create the task */}
