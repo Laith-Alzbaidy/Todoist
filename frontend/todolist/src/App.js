@@ -3,17 +3,22 @@ import Nav from "./component/Header/header";
 import Sidebar from "./component/Sidebar/sidebar";
 import ShowToDo from "./component/Todolist/showtodo";
 import { useContext, useState } from "react";
-import TodolistProvider from "./component/context";
 import Dialog2 from "./component/Dialog2/dialog2";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BarChart from "./component/Charts/chart";
+
 function App() {
   return (
     <div className="parent">
-      <TodolistProvider>
+      <BrowserRouter>
         <Nav />
+        <Routes>
+          {<Route path="/chart" element={<BarChart />} />}
+          {<Route path="/" element={<ShowToDo />} />}
+          {<Route path="/" element={<Dialog2 />} />}
+        </Routes>
         <Sidebar />
-        <ShowToDo />
-        <Dialog2 />
-      </TodolistProvider>
+      </BrowserRouter>
     </div>
   );
 }

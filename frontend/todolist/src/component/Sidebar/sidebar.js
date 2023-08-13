@@ -1,5 +1,5 @@
 import "./sidebar.css";
-
+import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div className="sidebar">
@@ -9,11 +9,15 @@ const Sidebar = () => {
         </span>
         <div className="wrapper">
           <i className="fa-solid fa-chess-board"></i>
-          <span>Platfrom Launch</span>
+          <Link to="/">
+            <span to="/">Platfrom Launch</span>
+          </Link>
         </div>
         <div className="wrapper">
           <i className="fa-solid fa-chess-board"></i>
-          <span>Marketing Plan</span>
+          <Link to="/chart" className="Link">
+            <span>Marketing Plan</span>
+          </Link>
         </div>
         <div className="wrapper">
           <i className="fa-solid fa-chess-board"></i>

@@ -71,6 +71,27 @@ exports.createSubtask = async (req, res) => {
   }
 };
 
+exports.updateSubtask = async (req, res) => {
+  try {
+    const { subtaskId, completed } = req.body;
+    // Find the subtask by ID
+    const subtask = await Subtask.findById(subtaskId);
+
+    // Update completion status
+    subtask.completed = completed;
+
+    res.status(200).json({
+      status: "subtask updaate sucsess",
+      data: subtask,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
+      message: err,
+    });
+  }
+};
+
 // exports.deleteSubtask = async (req, res) => {
 //   try {
 //     const subtask = await Subtask.findByIdAndDelete(req.params.id);

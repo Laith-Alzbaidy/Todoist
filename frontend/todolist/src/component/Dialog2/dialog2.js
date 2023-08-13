@@ -48,20 +48,18 @@ export default function FormDialog({ task, list }) {
             <div className="lable-input-dialog">
               <label>{`subtasks (${filteredSubtasks.length}/3)`}</label>
             </div>
-            {filteredSubtasks.map((subtask, index) => {
-              return (
-                <div className="lable-input-dialog lable-input">
-                  <label for={`checkbox${index}`}>
-                    <input
-                      type="checkbox"
-                      id={`checkbox${index}`}
-                      value={subtask.title}
-                    />
-                    {subtask.title}
-                  </label>
-                </div>
-              );
-            })}
+            {filteredSubtasks.map((subtask, index) => (
+              <div className="lable-input-dialog lable-input" key={index}>
+                <label htmlFor={`checkbox${index}`}>
+                  <input
+                    type="checkbox"
+                    id={`checkbox${index}`}
+                    value={subtask.title}
+                  />
+                  {subtask.title}
+                </label>
+              </div>
+            ))}
 
             <div className="lable-input-dialog">
               <label htmlFor="">Status</label>

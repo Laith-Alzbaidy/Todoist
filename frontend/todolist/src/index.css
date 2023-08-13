@@ -31,3 +31,8 @@ body {
   background: rgb(113, 113, 113);
   border-radius: 10px;
 } */
+
+a {
+  text-decoration: none !important;
+  color: inherit !important;
+}

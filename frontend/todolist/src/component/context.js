@@ -21,6 +21,7 @@ function TodolistProvider(props) {
   useEffect(() => {
     getLists();
     getTasks();
+    Getsubtask();
   }, []);
 
   // Fetch lists data from the API

@@ -20,10 +20,7 @@ export default function FormDialog() {
     getIdlist,
     task,
     setTask,
-    subtask,
     createSubTask,
-    setSubTasks,
-    subtasks,
     setSubtask,
   } = useContext(TodolistContext);
 
