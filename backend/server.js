@@ -10,6 +10,7 @@ const DB = process.env.DATABASE.replace(
   process.env.DATABASE_PASSWORD
 );
 
+// Connect to the MongoDB database using Mongoose
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
@@ -24,6 +25,7 @@ mongoose
     console.log("ERROR: Database connection failed 💣", err);
   });
 
+// Start the Express.js server
 const Port = process.env.PORT || 3000;
 app.listen(Port, () => {
   console.log(`Server is running on port ${Port} ...`);

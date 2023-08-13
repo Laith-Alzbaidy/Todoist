@@ -1,4 +1,4 @@
-import "./dialog2.css";
+import "./DialogShowSubTask.css";
 import { useState, useContext, useEffect } from "react";
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
@@ -7,8 +7,9 @@ import DialogContentText from "@mui/material/DialogContentText";
 import Task from "../Todolist/task";
 import { TodolistContext } from "../context";
 export default function FormDialog({ task, list }) {
-  const { deleteTask, subtasks, getTaskId } = useContext(TodolistContext);
+  const { deleteTask, subtasks } = useContext(TodolistContext);
 
+  // Filter subtasks based on taskId
   const filteredSubtasks = subtasks.filter(
     (subtask) => subtask?.taskId === task?._id
   );

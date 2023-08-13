@@ -8,6 +8,5 @@ router
   .route("/:id")
   .get(controller.getSpecificSubTask)
   .patch(controller.updateSubtask);
-// .delete(controller.deleteSubtask);
 
 module.exports = router;

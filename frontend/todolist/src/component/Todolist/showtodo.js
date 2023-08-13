@@ -1,6 +1,6 @@
 import Todolist from "./todolist";
 import AddList from "../AddList/addlist";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { TodolistContext } from "../context";
 
 function ShowTodo() {

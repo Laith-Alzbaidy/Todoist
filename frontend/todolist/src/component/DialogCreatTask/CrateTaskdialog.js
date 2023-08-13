@@ -24,11 +24,10 @@ export default function FormDialog() {
     setSubtask,
   } = useContext(TodolistContext);
 
+  // State for selected list ID and task details
   const GetSubtaskSolo = (event) => {
     setSubtask(event.target.value);
-    console.log(event.target.value);
   };
-  // State for selected list ID and task details
 
   // Update task details when inputs change
   const GetTask = (event) => {
@@ -42,7 +41,7 @@ export default function FormDialog() {
   // Handle form submission
   const handleForm = (event) => {
     event.preventDefault();
-    console.log(task);
+    handleClose();
     createTask(task); // Pass both selectedListId and task
   };
 

@@ -5,11 +5,19 @@ export const TodolistContext = createContext();
 
 function TodolistProvider(props) {
   // State to hold lists and tasks
+
+  // Holds the list of all titles
   const [lists, setAllTitleList] = useState([]);
+
+  // Holds the list of tasks
   const [tasks, setTasks] = useState([]);
+
+  // Holds the currently selected list's ID
   const [listId, setListCurrent] = useState("");
+
+  // Holds the list of subtasks
   const [subtasks, setSubTasks] = useState([]);
-  // const [taskId, setTaskId] = useState("");
+
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -24,7 +32,7 @@ function TodolistProvider(props) {
     Getsubtask();
   }, []);
 
-  // Fetch lists data from the API
+  //------- Start Fetch lists data from the API---------------------------------------------------------------------------------
   const getLists = async () => {
     try {
       const response = await axios.get("/api/v1/todolist");
@@ -43,8 +51,16 @@ function TodolistProvider(props) {
       console.log("Error creating list:", error);
     }
   };
+  //Get Id List
+  const getIdlist = (listId) => {
+    const selectedList = lists.find(
+      (list) => list._id === listId && list.title === task.status
+    );
+    if (selectedList) {
+      setListCurrent(selectedList._id);
+    }
+  };
 
-  // Fetch tasks data from the API
   const getTasks = async () => {
     try {
       const response = await axios.get("/api/v1/todotask");
@@ -54,22 +70,7 @@ function TodolistProvider(props) {
     }
   };
 
-  // Create a new task
-
-  // const createTask = async (task) => {
-  //   console.log(listId);
-  //   try {
-  //     const response = await axios.post(`/api/v1/todoTask/${listId}/tasks`, {
-  //       ...task,
-  //       listId,
-  //       // substask: subtask,
-  //     });
-  //     console.log("---------------", subtasks);
-  //     setTasks([...tasks, response.data.data]);
-  //   } catch (error) {
-  //     console.log("Error creating task:", error);
-  //   }
-  // };
+  //-----Start Fetch tasks data from the API-----------------------------------------------------------------------------------
 
   const createTask = async (task) => {
     console.log(tasks);
@@ -87,9 +88,6 @@ function TodolistProvider(props) {
         subtaskTitle: subtask,
       });
 
-      console.log("Created Task:", taskResponse.data.task);
-      console.log("Created Subtask:", subtaskResponse.data.subtask);
-
       // Update the tasks state with the new task
       setTasks([...tasks, taskResponse.data.task]);
 
@@ -100,37 +98,28 @@ function TodolistProvider(props) {
     }
   };
 
+  // Delete Task
   const deleteTask = async (taskId) => {
     try {
       // Send the delete request
       await axios.delete(`/api/v1/todotask/${taskId}`);
 
-      // await axios.delete(`/api/v1/subtask/${subtaskId}`);
       // updated tasks data and update the state
       const updatedTasks = tasks.filter((task) => task._id !== taskId);
       setTasks(updatedTasks);
-
-      // console.log("Task deleted successfully");
+    
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
 
-  const getIdlist = (listId) => {
-    const selectedList = lists.find(
-      (list) => list._id === listId && list.title === task.status
-    );
-    if (selectedList) {
-      // console.log(selectedList);
-      setListCurrent(selectedList._id);
-    }
-  };
 
+  
+  //-----Start Fetch subtask data from the API-----------------------------------------------------------------------------------
   // Get subtasks
   const Getsubtask = async () => {
     try {
       const response = await axios.get("/api/v1/subtask/");
-      // console.log(response.data.data);
       setSubTasks(response.data.data);
       console.log(response);
     } catch (err) {
@@ -138,20 +127,7 @@ function TodolistProvider(props) {
     }
   };
 
-  //create SubTask
-  // const createSubTask = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       `/api/v1/todotask/${taskId}/subtask`,
-  //       subtask
-  //     );
-  //     console.log(response.data.data);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  // Context data that will be provided to consuming components
+  // To Share Data to consuming components
   const data = {
     lists,
     tasks,
@@ -166,7 +142,6 @@ function TodolistProvider(props) {
     setSubtask,
     setSubTasks,
     subtask,
-    // GetTaskId,
   };
 
   return (

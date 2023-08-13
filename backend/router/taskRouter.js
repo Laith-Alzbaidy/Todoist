@@ -9,7 +9,6 @@ router
   .get(controller.getSpecificTask)
   .delete(controller.deleteTask);
 
-// router.route("/:id/subtask").post(controllerSubTask.createSubtaskInTask);
 router.route("/:id/tasks").post(controller.createTaskInList);
 router.route("/subtask").post(controllerSubTask.createSubtask);
 

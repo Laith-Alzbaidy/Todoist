@@ -1,7 +1,4 @@
-import React, { useContext } from "react"; // Don't forget to import React
 import "./task.css";
-import { TodolistContext } from "../context";
-
 function Task({ task }) {
   return (
     <>

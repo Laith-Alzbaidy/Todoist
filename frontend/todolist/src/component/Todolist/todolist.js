@@ -2,14 +2,13 @@ import "./todolist.css";
 import Task from "./task";
 import { TodolistContext } from "../context";
 import { useContext, useEffect } from "react";
-import Dialog2 from "../Dialog2/dialog2";
+import Dialog2 from "../DialogShowSubTask/DialogShowSubTask";
 import { green } from "@mui/material/colors";
 function Todolist({ list }) {
   const { tasks } = useContext(TodolistContext);
 
-  // Filter tasks belonging to the current list
+  //Filter tasks related to the list
   const tasksForCurrentList = tasks.filter((task) => task.listId === list._id);
-
   return (
     <section className="continer-todolist">
       <div className="header-list">

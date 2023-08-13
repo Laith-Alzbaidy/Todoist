@@ -3,7 +3,7 @@ import Nav from "./component/Header/header";
 import Sidebar from "./component/Sidebar/sidebar";
 import ShowToDo from "./component/Todolist/showtodo";
 import { useContext, useState } from "react";
-import Dialog2 from "./component/Dialog2/dialog2";
+import Dialog2 from "./component/DialogShowSubTask/DialogShowSubTask";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BarChart from "./component/Charts/chart";
 
