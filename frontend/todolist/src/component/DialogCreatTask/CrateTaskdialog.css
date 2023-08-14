@@ -17,6 +17,7 @@
 
 }
 
+
 .lable-input-dialog label {
   color: white;
 }
@@ -33,7 +34,7 @@
 
 .Subtasks-dialog {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -82,4 +83,10 @@
   right: 10px;
   font-size: 50px;
   cursor: pointer;
+}
+
+.input-subtask-remove {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

@@ -38,14 +38,19 @@ exports.getSpecificSubTask = async (req, res) => {
 // ----create Subtask-----------------------------------------------------------------------------------------------------------//
 
 exports.createSubtask = async (req, res) => {
-  const { taskId, subtaskTitle } = req.body;
+  console.log(req.body);
+  const { taskId, subtask } = req.body;
 
+  console.log("------------", subtask);
+  const subtasks = subtask.map((ele) => {
+    ele.taskId = taskId;
+    return ele;
+  });
+
+  console.log("***************", subtasks);
   try {
     // Create the associated subtask
-    const savedSubtask = await Subtask.create({
-      title: subtaskTitle,
-      taskId,
-    });
+    const savedSubtask = await Subtask.create(subtasks);
 
     const task = await Task.findById(taskId);
     task.subtasks.push(savedSubtask._id);

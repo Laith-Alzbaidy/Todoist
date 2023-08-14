@@ -74,7 +74,7 @@ exports.deleteTask = async (req, res) => {
 
 // -------Create Task in List-------------------------------------------------------------------------------------------------------//
 exports.createTaskInList = async (req, res) => {
-  const { title, description, subtask } = req.body;
+  const { title, description } = req.body;
   const listId = req.params.id; // Extract title and description from the request body
   try {
     // Create the main task
@@ -82,7 +82,6 @@ exports.createTaskInList = async (req, res) => {
       title,
       description,
       listId,
-      subtask,
     });
 
     // Set Task to inside List
@@ -92,7 +91,7 @@ exports.createTaskInList = async (req, res) => {
 
     res.status(201).json({
       task: newTask,
-      subtask: subtask,
+      // subtask: subtask,
     });
   } catch (error) {
     console.error(error);

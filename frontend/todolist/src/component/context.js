@@ -23,7 +23,7 @@ function TodolistProvider(props) {
     description: "",
     status: "",
   });
-  const [subtask, setSubtask] = useState("");
+  const [subtask, setSubtask] = useState([]);
 
   // Fetch lists and tasks when the component mounts
   useEffect(() => {
@@ -73,7 +73,7 @@ function TodolistProvider(props) {
   //-----Start Fetch tasks data from the API-----------------------------------------------------------------------------------
 
   const createTask = async (task) => {
-    console.log(tasks);
+    console.log(subtask);
     try {
       // Create the main task
       const taskResponse = await axios.post(
@@ -84,7 +84,7 @@ function TodolistProvider(props) {
       // Create the associated subtask
       const subtaskResponse = await axios.post(`/api/v1/todoTask/subtask`, {
         taskId: taskResponse.data.task._id,
-        subtaskTitle: subtask,
+        subtask,
       });
 
       // Update the tasks state with the new task

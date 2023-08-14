@@ -22,12 +22,32 @@ export default function FormDialog() {
     setTask,
     createSubTask,
     setSubtask,
+    subtask,
   } = useContext(TodolistContext);
 
-  // State for selected list ID and task details
-  const GetSubtaskSolo = (event) => {
-    setSubtask(event.target.value);
+  //Create NEW SubTask
+
+  const CreateNewSubtask = () => {
+    if (subtask.length < 3) {
+      const newSubTask = [...subtask, { title: "" }];
+      setSubtask(newSubTask);
+    } else {
+      alert("you cant add more than 3 subtasks");
+    }
   };
+
+  // update subtask title if i change input
+
+  const updateSubtasks = (index, newTitle) => {
+    const newSubtasks = [...subtask];
+    newSubtasks[index].title = newTitle;
+    setSubtask(newSubtasks);
+  };
+
+  // State for selected list ID and task details
+  // const GetSubtaskSolo = (event) => {
+  //   setSubtask(event.target.value);
+  // };
 
   // Update task details when inputs change
   const GetTask = (event) => {
@@ -96,16 +116,31 @@ export default function FormDialog() {
             <div className="lable-input-dialog">
               <label>Subtasks</label>
               <div className="Subtasks-dialog">
-                <input
-                  type="text"
-                  placeholder="e.g. Make coffee"
-                  onChange={(e) => GetSubtaskSolo(e)}
-                  name="title"
-                />
-                <i className="fa-solid fa-xmark icon-remove-dialog"></i>
+                {subtask.map((subtask, index) => {
+                  return (
+                    <div className="input-subtask-remove">
+                      <input
+                        type="text"
+                        placeholder="e.g. Make coffee"
+                        onChange={(e) => updateSubtasks(index, e.target.value)}
+                        name="title"
+                      />
+                      <i className="fa-solid fa-xmark icon-remove-dialog"></i>
+                    </div>
+                  );
+                })}
+                {/* <div className="input-subtask-remove">
+                  <input
+                    type="text"
+                    placeholder="e.g. Make coffee"
+                    onChange={(e) => GetSubtaskSolo(e)}
+                    name="title"
+                  />
+                  <i className="fa-solid fa-xmark icon-remove-dialog"></i>
+                </div> */}
               </div>
             </div>
-            <Button onClick={createSubTask} className="btn-dialog">
+            <Button onClick={CreateNewSubtask} className="btn-dialog">
               Add New Subtask
             </Button>
 
