@@ -125,14 +125,11 @@ function TodolistProvider(props) {
     }
   };
 
-  const completedSubtask = async () => {
+  const completedSubtask = async (subtaskId, completed) => {
     try {
-      const response = await axios.patch(
-        `/api/v1/subtask/64da6204c4e61f28f42ee8c0`,
-        {
-          completed: true,
-        }
-      );
+      const response = await axios.patch(`/api/v1/subtask/${subtaskId}`, {
+        completed: completed,
+      });
       console.log("................", response.data.data);
       Getsubtask();
     } catch (err) {

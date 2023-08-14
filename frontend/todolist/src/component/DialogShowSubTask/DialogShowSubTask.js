@@ -13,23 +13,13 @@ export default function FormDialog({ task, list }) {
   const { deleteTask, subtasks, completedSubtask } =
     useContext(TodolistContext);
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    if (event.target.checked) {
-      console.log("done");
-      completedSubtask();
-    }
-  };
-
   // Filter subtasks based on taskId
   const filteredSubtasks = subtasks.filter(
     (subtask) => subtask?.taskId === task?._id
   );
 
   const completed = filteredSubtasks.filter((ele) => {
-    return ele.completed === false;
+    return ele.completed === true;
   });
 
   const [open, setOpen] = useState(false);
@@ -75,10 +65,16 @@ export default function FormDialog({ task, list }) {
                       type="checkbox"
                       id={`checkbox${index}`}
                       value={subtask.title}
-                      // checked={subtask.completed}
-                      onChange={(e) => handleCheckboxChange(e)}
+                      checked={subtask.completed}
+                      onChange={() => {
+                        completedSubtask(subtask._id, !subtask.completed);
+                      }}
                     />
-                    {isChecked ? subtask.title : <del>{subtask.title}</del>}
+                    {subtask.completed ? (
+                      <del>{subtask.title}</del>
+                    ) : (
+                      subtask.title
+                    )}
                   </label>
                 </div>
               );
