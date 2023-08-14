@@ -115,7 +115,57 @@ exports.UpdateTask = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: "feild",
-      massage: { err },
+      massage: err,
+    });
+  }
+};
+
+// -------move Task to another List-------------------------------------------------------------------------------------------------------//
+
+exports.moveTask = async (req, res) => {
+  const taskId = req.params.taskId;
+  const { newListId } = req.body;
+
+  try {
+    const task = await Task.findById(taskId);
+
+    const listOrginalId = task.listId;
+    console.log("taskId", task._id);
+    console.log("newListId", newListId);
+    console.log("listOrginalId", listOrginalId);
+
+    if (listOrginalId == newListId) {
+      return res.status(400).json({
+        status: "feild",
+        massage: "the task is already in this list",
+      });
+    }
+
+    const originalList = await List.findById(listOrginalId);
+    const newList = await List.findById(newListId);
+
+    // Remove the task from the original list
+    originalList.taskList.pull(taskId);
+    await originalList.save();
+
+    // Remove the task from the original list
+    newList.taskList.push(taskId);
+    await newList.save();
+
+    // Update the task's listId
+    task.listId = newListId;
+    await task.save();
+
+    res.status(200).json({
+      status: "sucsess",
+      massage: "the move is done",
+    });
+    // console.log("-----originalList", originalList);
+    // console.log("-----newList", newList);
+  } catch (err) {
+    res.status(404).json({
+      status: "feild",
+      massage: "the move task is not work ",
     });
   }
 };

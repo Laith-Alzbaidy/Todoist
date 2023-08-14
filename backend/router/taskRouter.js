@@ -12,5 +12,6 @@ router
 
 router.route("/:id/tasks").post(controller.createTaskInList);
 router.route("/subtask").post(controllerSubTask.createSubtask);
+router.route("/move/:taskId").put(controller.moveTask);
 
 module.exports = router;
