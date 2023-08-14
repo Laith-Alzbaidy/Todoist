@@ -18,6 +18,7 @@ export default function FormDialog({ task, list }) {
     (subtask) => subtask?.taskId === task?._id
   );
 
+  //// Filter completed subtasks
   const completed = filteredSubtasks.filter((ele) => {
     return ele.completed === true;
   });

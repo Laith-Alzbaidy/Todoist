@@ -38,22 +38,28 @@ exports.getSpecificSubTask = async (req, res) => {
 // ----create Subtask-----------------------------------------------------------------------------------------------------------//
 
 exports.createSubtask = async (req, res) => {
-  console.log(req.body);
   const { taskId, subtask } = req.body;
-
-  console.log("------------", subtask);
+  // To get the title of the subtask from the body because
+  //  I need to create a schema for each subtask which has id
   const subtasks = subtask.map((ele) => {
     ele.taskId = taskId;
     return ele;
   });
 
-  console.log("***************", subtasks);
   try {
     // Create the associated subtask
     const savedSubtask = await Subtask.create(subtasks);
 
+    // to get id subtask to push inside task
+    const subtaskIds = savedSubtask.map((subtask) => subtask._id);
+
     const task = await Task.findById(taskId);
-    task.subtasks.push(savedSubtask._id);
+
+    // console.log("------------", savedSubtask.title);
+    // console.log("------------", savedSubtask._id);
+    // console.log("------------", task);
+
+    task.subtasks.push(...subtaskIds);
     task.save();
 
     res.status(201).json({

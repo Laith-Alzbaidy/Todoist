@@ -1,7 +1,8 @@
+import { useContext } from "react";
+import TodolistProvider from "../context";
 import "./task.css";
 function Task({ task }) {
-
-  
+  console.log(task);
   return (
     <>
       {task && (
