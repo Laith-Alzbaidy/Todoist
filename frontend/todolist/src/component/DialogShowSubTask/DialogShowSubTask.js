@@ -5,7 +5,10 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Task from "../Todolist/task";
+import EditTask from "../EditTask/EditTask";
+
 import { TodolistContext } from "../context";
+
 export default function FormDialog({ task, list }) {
   const { deleteTask, subtasks } = useContext(TodolistContext);
 
@@ -41,7 +44,7 @@ export default function FormDialog({ task, list }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogContent id="dialog" className="Containar">
           <div className="Header-dilaog-colomn">
-            <h3 className="DialogTitle">{task?.title}</h3>
+            <EditTask task={task} />
             <i className="fa fa-ellipsis-v icon-dialog" aria-hidden="true"></i>
           </div>
           <p>{task?.description}</p>

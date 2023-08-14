@@ -14,12 +14,17 @@
 }
 
 .substasks {
-  color: rgb(97, 102, 121);
   display: flex;
   gap: 3px;
 }
 
+
 .header-task {
   display: flex;
   justify-content: space-between;
+}
+
+.CountSubtask {
+  color: rgb(97, 102, 121);
+  ;
 }

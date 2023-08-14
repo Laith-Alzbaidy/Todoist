@@ -1,5 +1,5 @@
 const Subtask = require("../model/subtaskModel");
-
+const Task = require("../model/taskModel");
 // ---- Get all lists-----------------------------------------------------------------------------------------------------------//
 exports.getAllSubtask = async (req, res) => {
   try {
@@ -46,6 +46,10 @@ exports.createSubtask = async (req, res) => {
       title: subtaskTitle,
       taskId,
     });
+
+    const task = await Task.findById(taskId);
+    task.subtasks.push(savedSubtask._id);
+    task.save();
 
     res.status(201).json({
       subtask: savedSubtask,

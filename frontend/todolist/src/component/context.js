@@ -107,14 +107,11 @@ function TodolistProvider(props) {
       // updated tasks data and update the state
       const updatedTasks = tasks.filter((task) => task._id !== taskId);
       setTasks(updatedTasks);
-    
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
 
-
-  
   //-----Start Fetch subtask data from the API-----------------------------------------------------------------------------------
   // Get subtasks
   const Getsubtask = async () => {

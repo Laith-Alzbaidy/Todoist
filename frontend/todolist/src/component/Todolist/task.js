@@ -1,5 +1,7 @@
 import "./task.css";
 function Task({ task }) {
+
+  
   return (
     <>
       {task && (
@@ -10,7 +12,7 @@ function Task({ task }) {
           <h6>{task.description}</h6>
           <div className="substasks"></div>
 
-          <div>
+          <div className="CountSubtask">
             <span>0</span>
             <span>of</span>
             <span>3</span>

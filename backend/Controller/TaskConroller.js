@@ -74,7 +74,7 @@ exports.deleteTask = async (req, res) => {
 
 // -------Create Task in List-------------------------------------------------------------------------------------------------------//
 exports.createTaskInList = async (req, res) => {
-  const { title, description } = req.body;
+  const { title, description, subtask } = req.body;
   const listId = req.params.id; // Extract title and description from the request body
   try {
     // Create the main task
@@ -82,11 +82,7 @@ exports.createTaskInList = async (req, res) => {
       title,
       description,
       listId,
-    });
-
-    // Create the associated subtask
-    const subtask = await Subtask.create({
-      taskId: newTask._id, // Link the subtask to the task
+      subtask,
     });
 
     // Set Task to inside List
