@@ -104,10 +104,6 @@ export default function FormDialog() {
                 />
                 <i className="fa-solid fa-xmark icon-remove-dialog"></i>
               </div>
-              {/* <div className="Subtasks-dialog">
-                <input type="text" placeholder="e.g. Make coffee" />
-                <i className="fa-solid fa-xmark icon-remove-dialog"></i>
-              </div> */}
             </div>
             <Button onClick={createSubTask} className="btn-dialog">
               Add New Subtask

@@ -81,7 +81,6 @@ function TodolistProvider(props) {
         task,
         listId
       );
-
       // Create the associated subtask
       const subtaskResponse = await axios.post(`/api/v1/todoTask/subtask`, {
         taskId: taskResponse.data.task._id,
@@ -107,6 +106,20 @@ function TodolistProvider(props) {
       // updated tasks data and update the state
       const updatedTasks = tasks.filter((task) => task._id !== taskId);
       setTasks(updatedTasks);
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  //Update Task
+  // api/v1/todotask/64da12abdcc94145ecb531d5
+  const UpdateTask = async (taskId, newTitle) => {
+    try {
+      const task = await axios.patch(`/api/v1/todotask/${taskId}`, {
+        title: newTitle,
+      });
+
+      getTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -139,6 +152,7 @@ function TodolistProvider(props) {
     setSubtask,
     setSubTasks,
     subtask,
+    UpdateTask,
   };
 
   return (

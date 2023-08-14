@@ -1,9 +1,9 @@
 .task-title-edit {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
 }
 
 .task-title-edit input {
@@ -13,6 +13,13 @@
   font-size: 17px;
 }
 
-.editFromDialog {
+.editFromDialog,
+.done-edit {
   color: white;
+  font-size: 20px;
+}
+
+.DialogTitle {
+  width: 100%;
+  margin: 4px 0;
 }

@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TodolistContext } from "../context";
 import "./Edittask.css";
 function EditTask({ task }) {
-  const [open, setOpen] = useState(false);
+  const { UpdateTask } = useContext(TodolistContext);
 
+  const [open, setOpen] = useState(false);
+  const [newTitle, setEditTitle] = useState("");
+
+  const handleChangeInput = (event) => {
+    setEditTitle(event.target.value);
+  };
+
+  const EditTask = () => {
+    console.log(newTitle);
+    HandelClose();
+    UpdateTask(task._id, newTitle);
+    // newTitle && { HandelClose }
+  };
   const HandelClose = () => {
     setOpen(false);
   };
@@ -14,7 +28,17 @@ function EditTask({ task }) {
     <>
       {open ? (
         <div className="task-title-edit">
-          <input type="text" value={task.title} />
+          <input
+            onChange={handleChangeInput}
+            placeholder="Edit task title..."
+            type="text"
+            value={newTitle}
+          />
+          <i
+            onClick={EditTask}
+            class="fa fa-check done-edit"
+            aria-hidden="true"
+          ></i>
           <i onClick={HandelClose} class="fa-solid fa-xmark editFromDialog"></i>
         </div>
       ) : (

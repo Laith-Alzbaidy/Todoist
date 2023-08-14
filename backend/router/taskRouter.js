@@ -7,7 +7,8 @@ router.route("/").post(controller.createTask).get(controller.getAllTask);
 router
   .route("/:id")
   .get(controller.getSpecificTask)
-  .delete(controller.deleteTask);
+  .delete(controller.deleteTask)
+  .patch(controller.UpdateTask);
 
 router.route("/:id/tasks").post(controller.createTaskInList);
 router.route("/subtask").post(controllerSubTask.createSubtask);

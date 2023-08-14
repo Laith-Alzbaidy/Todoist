@@ -101,3 +101,22 @@ exports.createTaskInList = async (req, res) => {
     });
   }
 };
+
+// -------Update Task-------------------------------------------------------------------------------------------------------//
+exports.UpdateTask = async (req, res) => {
+  try {
+    const taskId = req.params.id;
+    const task = await Task.findByIdAndUpdate(taskId, req.body, {
+      new: true,
+    });
+    res.status(200).json({
+      status: "sucess",
+      data: task,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "feild",
+      massage: { err },
+    });
+  }
+};
