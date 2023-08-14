@@ -10,12 +10,27 @@ import EditTask from "../EditTask/EditTask";
 import { TodolistContext } from "../context";
 
 export default function FormDialog({ task, list }) {
-  const { deleteTask, subtasks } = useContext(TodolistContext);
+  const { deleteTask, subtasks, completedSubtask } =
+    useContext(TodolistContext);
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    if (event.target.checked) {
+      console.log("done");
+      completedSubtask();
+    }
+  };
 
   // Filter subtasks based on taskId
   const filteredSubtasks = subtasks.filter(
     (subtask) => subtask?.taskId === task?._id
   );
+
+  const completed = filteredSubtasks.filter((ele) => {
+    return ele.completed === false;
+  });
 
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -50,20 +65,24 @@ export default function FormDialog({ task, list }) {
           <p>{task?.description}</p>
           <form action="" className="form-dialog">
             <div className="lable-input-dialog">
-              <label>{`subtasks (${filteredSubtasks.length}/3)`}</label>
+              <label>{`subtasks (${completed.length}/3)`}</label>
             </div>
-            {filteredSubtasks.map((subtask, index) => (
-              <div className="lable-input-dialog lable-input" key={index}>
-                <label htmlFor={`checkbox${index}`}>
-                  <input
-                    type="checkbox"
-                    id={`checkbox${index}`}
-                    value={subtask.title}
-                  />
-                  {subtask.title}
-                </label>
-              </div>
-            ))}
+            {filteredSubtasks.map((subtask, index) => {
+              return (
+                <div className="lable-input-dialog lable-input" key={index}>
+                  <label htmlFor={`checkbox${index}`}>
+                    <input
+                      type="checkbox"
+                      id={`checkbox${index}`}
+                      value={subtask.title}
+                      // checked={subtask.completed}
+                      onChange={(e) => handleCheckboxChange(e)}
+                    />
+                    {isChecked ? subtask.title : <del>{subtask.title}</del>}
+                  </label>
+                </div>
+              );
+            })}
 
             <div className="lable-input-dialog">
               <label htmlFor="">Status</label>

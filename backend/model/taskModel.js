@@ -10,7 +10,6 @@ const TaskSchema = mongoose.Schema({
   },
   listId: { type: mongoose.Schema.Types.ObjectId, ref: "List" },
   subtasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Subtask" }],
-  completed: { type: Boolean, default: false },
   status: { type: String },
 });
 

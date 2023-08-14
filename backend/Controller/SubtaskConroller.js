@@ -71,12 +71,15 @@ exports.createSubtask = async (req, res) => {
 
 exports.updateSubtask = async (req, res) => {
   try {
-    const { subtaskId, completed } = req.body;
-    // Find the subtask by ID
-    const subtask = await Subtask.findById(subtaskId);
+    const subtaskId = req.params.id;
 
+    console.log(subtaskId);
+    console.log("...", req.body);
+    // Find the subtask by ID
+    const subtask = await Subtask.findByIdAndUpdate(subtaskId, req.body, {
+      new: true,
+    });
     // Update completion status
-    subtask.completed = completed;
 
     res.status(200).json({
       status: "subtask updaate sucsess",

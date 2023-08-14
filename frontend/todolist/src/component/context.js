@@ -125,6 +125,21 @@ function TodolistProvider(props) {
     }
   };
 
+  const completedSubtask = async () => {
+    try {
+      const response = await axios.patch(
+        `/api/v1/subtask/64da6204c4e61f28f42ee8c0`,
+        {
+          completed: true,
+        }
+      );
+      console.log("................", response.data.data);
+      Getsubtask();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   //-----Start Fetch subtask data from the API-----------------------------------------------------------------------------------
   // Get subtasks
   const Getsubtask = async () => {
@@ -153,6 +168,7 @@ function TodolistProvider(props) {
     setSubTasks,
     subtask,
     UpdateTask,
+    completedSubtask,
   };
 
   return (
