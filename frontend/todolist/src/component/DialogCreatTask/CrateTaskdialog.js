@@ -36,6 +36,12 @@ export default function FormDialog() {
     }
   };
 
+  const removeSubtask = (index) => {
+    const newSubtasks = [...subtask];
+    newSubtasks.splice(index, 1);
+    setSubtask(newSubtasks);
+  };
+
   // update subtask title if i change input
 
   const updateSubtasks = (index, newTitle) => {
@@ -125,7 +131,10 @@ export default function FormDialog() {
                         onChange={(e) => updateSubtasks(index, e.target.value)}
                         name="title"
                       />
-                      <i className="fa-solid fa-xmark icon-remove-dialog"></i>
+                      <i
+                        onClick={() => removeSubtask(index)}
+                        className="fa-solid fa-xmark icon-remove-dialog"
+                      ></i>
                     </div>
                   );
                 })}

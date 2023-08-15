@@ -1,4 +1,6 @@
 const List = require("../model/listModel"); // Import your List model
+const Subtask = require("../model/subtaskModel");
+const Task = require("../model/taskModel");
 
 // ------- Create a new list-------------------------------------------------------------------------------------------------------//
 exports.createList = async (req, res) => {
@@ -28,7 +30,6 @@ exports.getAllList = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: "error",
-      message: "Internal server error",
       error: err.message,
     });
   }
@@ -37,7 +38,7 @@ exports.getAllList = async (req, res) => {
 // -------Get  Specific List by ID-------------------------------------------------------------------------------------------------------//
 exports.getSpecificList = async (req, res) => {
   try {
-    const list = await List.findById(req.params.id).populate("taskList"); // Populate the taskList field
+    const list = await List.findById(req.params.id);
     res.status(200).json({
       status: "success",
       data: list,
@@ -45,7 +46,33 @@ exports.getSpecificList = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       status: "error",
-      message: "Internal server error",
+      error: err.message,
+    });
+  }
+};
+// -------Delete List-------------------------------------------------------------------------------------------------------//
+exports.deleteList = async (req, res) => {
+  try {
+    const listId = req.params.id;
+
+    console.log("-----------------", req.body);
+
+    // Delete the list
+    const list = await List.findByIdAndDelete(listId);
+
+    // Delete tasks
+    await Task.deleteMany({ listId: listId });
+
+    // Find tasks to get their IDs and delete associated subtasks
+    const tasks = await Task.find({ listId: listId });
+
+    res.status(200).json({
+      status: "success",
+      data: null,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: "error",
       error: err.message,
     });
   }

@@ -5,22 +5,30 @@ import { useContext, useEffect } from "react";
 import Dialog2 from "../DialogShowSubTask/DialogShowSubTask";
 import { green } from "@mui/material/colors";
 function Todolist({ list }) {
-  const { tasks } = useContext(TodolistContext);
+  const { tasks, DeleteList } = useContext(TodolistContext);
 
   //Filter tasks related to the list
   const tasksForCurrentList = tasks.filter((task) => task.listId === list._id);
   return (
     <section className="continer-todolist">
       <div className="header-list">
-        <span
-          style={{ backgroundColor: `${list.color}` }}
-          className="circle"
-        ></span>
-        <span>
-          {list.title}
-          {`(${tasksForCurrentList.length})`}
-        </span>
-        <i className="fa-solid fa-xmark icon-remove-dialog"></i>{" "}
+        <div>
+          <span
+            style={{ backgroundColor: `${list.color}` }}
+            className="circle"
+          ></span>
+          <span>
+            {list.title}
+            {`(${tasksForCurrentList.length})`}
+          </span>
+        </div>
+        <i
+          onClick={() => {
+            DeleteList(list._id);
+          }}
+          class="fa fa-trash"
+          aria-hidden="true"
+        ></i>{" "}
       </div>
 
       <div className="content-list">

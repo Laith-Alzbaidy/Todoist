@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-
+import Swal from "sweetalert2";
 export const TodolistContext = createContext();
 
 function TodolistProvider(props) {
@@ -61,6 +61,30 @@ function TodolistProvider(props) {
     }
   };
 
+  //Delete list
+
+  const DeleteList = async (ListId) => {
+    try {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const response = axios.delete(`/api/v1/todolist/${ListId}`);
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        }
+      });
+      console.log(ListId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  //-----Start Fetch tasks data from the API-----------------------------------------------------------------------------------
   const getTasks = async () => {
     try {
       const response = await axios.get("/api/v1/todotask");
@@ -69,8 +93,6 @@ function TodolistProvider(props) {
       console.log("Error fetching tasks:", error);
     }
   };
-
-  //-----Start Fetch tasks data from the API-----------------------------------------------------------------------------------
 
   const createTask = async (task) => {
     console.log(subtask);
@@ -105,7 +127,6 @@ function TodolistProvider(props) {
     try {
       // Send the delete request
       await axios.delete(`/api/v1/todotask/${taskId}`);
-
       // updated tasks data and update the state
       const updatedTasks = tasks.filter((task) => task._id !== taskId);
       setTasks(updatedTasks);
@@ -186,6 +207,7 @@ function TodolistProvider(props) {
     UpdateTask,
     completedSubtask,
     MoveTaskToAnotherList,
+    DeleteList,
   };
 
   return (

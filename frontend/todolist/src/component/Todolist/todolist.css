@@ -11,7 +11,23 @@
   font-size: 16px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  /* gap: 5px; */
+  padding-right: 10px;
+  justify-content: space-between;
+}
+
+.header-list div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fa-trash {
+  cursor: pointer;
+}
+
+.fa-trash:hover {
+  color: rgb(100, 95, 198);
 }
 
 .circle {
