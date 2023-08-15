@@ -19,6 +19,24 @@
   font-size: 20px;
 }
 
+
+.edit_button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fa:hover {
+  color: rgb(100, 95, 198);
+  cursor: pointer;
+}
+
+.edit_button i {
+  font-size: 30px;
+  color: white;
+}
+
 .DialogTitle {
   width: 100%;
   margin: 4px 0;

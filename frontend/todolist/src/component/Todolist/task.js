@@ -32,7 +32,7 @@ function Task({ task }) {
           <div className="CountSubtask">
             <span>{completed.length}</span>
             <span>of</span>
-            <span>3</span>
+            <span>{filteredSubtasks.length}</span>
             <span>substasks</span>
           </div>
         </div>

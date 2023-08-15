@@ -69,6 +69,7 @@ export default function FormDialog() {
     event.preventDefault();
     handleClose();
     createTask(task); // Pass both selectedListId and task
+    setTask("");
   };
 
   // Open the dialog

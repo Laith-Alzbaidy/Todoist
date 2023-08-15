@@ -42,9 +42,10 @@ function EditTask({ task }) {
           <i onClick={HandelClose} class="fa-solid fa-xmark editFromDialog"></i>
         </div>
       ) : (
-        <h3 onClick={HandelOpen} className="DialogTitle">
-          {task?.title}
-        </h3>
+        <div className="edit_button">
+          <h3 className="DialogTitle">{task?.title}</h3>
+          <i onClick={HandelOpen} class="fa-solid fa-pen-to-square"></i>
+        </div>
       )}
     </>
   );

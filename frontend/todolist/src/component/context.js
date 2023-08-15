@@ -81,6 +81,7 @@ function TodolistProvider(props) {
           getLists();
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
+        getLists();
       });
       console.log(ListId);
     } catch (err) {
@@ -120,6 +121,8 @@ function TodolistProvider(props) {
           subtask,
         });
       }
+
+      setSubtask([]);
       // Update the tasks state with the new task
       setTasks([...tasks, taskResponse.data.task]);
 
@@ -167,6 +170,7 @@ function TodolistProvider(props) {
         completed: completed,
       });
       console.log("................", response.data.data);
+
       Getsubtask();
     } catch (err) {
       console.log(err);

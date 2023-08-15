@@ -62,7 +62,7 @@ export default function FormDialog({ task, list }) {
           <p>{task?.description}</p>
           <form action="" className="form-dialog">
             <div className="lable-input-dialog">
-              <label>{`subtasks (${completed.length}/3)`}</label>
+              <label>{`subtasks (${completed.length}/${filteredSubtasks.length})`}</label>
             </div>
             {filteredSubtasks.map((subtask, index) => {
               return (
