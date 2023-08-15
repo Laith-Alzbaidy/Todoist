@@ -4,6 +4,7 @@ const List = require("../model/listModel"); // Import  List model
 
 // -------Create a new Task--------------------------------------------------------------------------------------//
 exports.createTask = async (req, res) => {
+  
   try {
     const task = await Task.create(req.body);
 
@@ -39,7 +40,7 @@ exports.getAllTask = async (req, res) => {
 // -------Get a specific Task by ID--------------------------------------------------------------------------------------//
 exports.getSpecificTask = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
+    const task = await Task.findById(req.params.id).populate("subtasks");
     res.status(200).json({
       status: "success",
       data: task,

@@ -1,8 +1,24 @@
 import { useContext } from "react";
-import TodolistProvider from "../context";
+import { TodolistContext } from "../context";
+
 import "./task.css";
 function Task({ task }) {
-  console.log(task);
+  // console.log("-------------------------------------------", task);
+  const { completedSub, TaskID, subtasks } = useContext(TodolistContext);
+
+  const completedSubtasks = task.subtasks.filter(
+    (subtask) => subtask.completed
+  );
+
+  const filteredSubtasks = subtasks.filter(
+    (subtask) => subtask?.taskId === task?._id
+  );
+
+  //// Filter completed subtasks
+  const completed = filteredSubtasks.filter((ele) => {
+    return ele.completed === true;
+  });
+
   return (
     <>
       {task && (
@@ -14,7 +30,7 @@ function Task({ task }) {
           <div className="substasks"></div>
 
           <div className="CountSubtask">
-            <span>0</span>
+            <span>{completed.length}</span>
             <span>of</span>
             <span>3</span>
             <span>substasks</span>

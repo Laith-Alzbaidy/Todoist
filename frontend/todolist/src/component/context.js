@@ -23,6 +23,8 @@ function TodolistProvider(props) {
     description: "",
     status: "",
   });
+
+  // const [completedSub, setCompletedSubtask] = useState([]);
   const [subtask, setSubtask] = useState([]);
 
   // Fetch lists and tasks when the component mounts
@@ -76,6 +78,7 @@ function TodolistProvider(props) {
       }).then((result) => {
         if (result.isConfirmed) {
           const response = axios.delete(`/api/v1/todolist/${ListId}`);
+          getLists();
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
@@ -84,6 +87,11 @@ function TodolistProvider(props) {
       console.log(err);
     }
   };
+
+  // const getCompleted = (completed) => {
+  //   console.log(completed.length);
+  //   setCompletedSubtask(completed);
+  // };
   //-----Start Fetch tasks data from the API-----------------------------------------------------------------------------------
   const getTasks = async () => {
     try {
@@ -149,7 +157,11 @@ function TodolistProvider(props) {
     }
   };
 
-  const completedSubtask = async (subtaskId, completed) => {
+  const [TaskID, setTaskID] = useState("");
+
+  const completedSubtask = async (subtaskId, completed, taskId) => {
+    console.log("task._id", TaskID);
+    setTaskID(taskId);
     try {
       const response = await axios.patch(`/api/v1/subtask/${subtaskId}`, {
         completed: completed,
@@ -179,7 +191,7 @@ function TodolistProvider(props) {
   //-----Start Fetch subtask data from the API-----------------------------------------------------------------------------------
 
   // Get subtasks
-  const Getsubtask = async () => {
+  const Getsubtask = async (taskId) => {
     try {
       const response = await axios.get("/api/v1/subtask/");
       setSubTasks(response.data.data);
@@ -208,6 +220,7 @@ function TodolistProvider(props) {
     completedSubtask,
     MoveTaskToAnotherList,
     DeleteList,
+    TaskID,
   };
 
   return (

@@ -1,8 +1,9 @@
 .continer-todolist {
+  height: -moz-fit-content;
   height: fit-content;
-  margin: 15px;
-  padding: 10px;
-  min-width: 300px;
+  margin: 25px 10px 1px 15px;
+  padding: 0px;
+  min-width: 350px;
 }
 
 .header-list {

@@ -21,6 +21,10 @@ body {
   grid-template-rows: repeat(12, auto);
 }
 
+h6 {
+  color: rgb(97, 102, 121);
+  font-size: 13px;
+}
 
 .icon-add-remove i {
   color: white;

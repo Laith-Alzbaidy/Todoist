@@ -74,7 +74,11 @@ export default function FormDialog({ task, list }) {
                       value={subtask.title}
                       checked={subtask.completed}
                       onChange={() => {
-                        completedSubtask(subtask._id, !subtask.completed);
+                        completedSubtask(
+                          subtask._id,
+                          !subtask.completed,
+                          task._id
+                        );
                       }}
                     />
                     {subtask.completed ? (

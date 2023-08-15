@@ -22,7 +22,7 @@ exports.getAllSubtask = async (req, res) => {
 
 exports.getSpecificSubTask = async (req, res) => {
   try {
-    const subtask = await Subtask.findById(req.params.id);
+    const subtask = await Subtask.findById(req.params.id).p;
     res.status(200).json({
       status: "success",
       data: subtask,
@@ -98,5 +98,4 @@ exports.updateSubtask = async (req, res) => {
     });
   }
 };
-
 

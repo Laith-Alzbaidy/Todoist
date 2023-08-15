@@ -26,7 +26,7 @@ function Todolist({ list }) {
           onClick={() => {
             DeleteList(list._id);
           }}
-          class="fa fa-trash"
+          className="fa fa-trash"
           aria-hidden="true"
         ></i>{" "}
       </div>
