@@ -87,7 +87,7 @@ exports.createTaskInList = async (req, res) => {
     // Set Task to inside List
     const updateTasks = await List.findById(listId);
     updateTasks.taskList.push(newTask._id);
-    updateTasks.save();
+    await updateTasks.save();
 
     res.status(201).json({
       task: newTask,
@@ -125,14 +125,14 @@ exports.UpdateTask = async (req, res) => {
 exports.moveTask = async (req, res) => {
   const taskId = req.params.taskId;
   const { newListId } = req.body;
-
+  console.log("-------------", newListId);
   try {
     const task = await Task.findById(taskId);
 
     const listOrginalId = task.listId;
-    console.log("taskId", task._id);
-    console.log("newListId", newListId);
-    console.log("listOrginalId", listOrginalId);
+    // console.log("taskId", task._id);
+    // console.log("newListId", newListId);
+    // console.log("listOrginalId", listOrginalId);
 
     if (listOrginalId == newListId) {
       return res.status(400).json({

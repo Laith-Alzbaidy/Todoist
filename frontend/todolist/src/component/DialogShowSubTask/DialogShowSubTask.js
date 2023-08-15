@@ -6,12 +6,18 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Task from "../Todolist/task";
 import EditTask from "../EditTask/EditTask";
+// import ListOption from "../StatusDialog/StatusDialog";
 
 import { TodolistContext } from "../context";
 
 export default function FormDialog({ task, list }) {
-  const { deleteTask, subtasks, completedSubtask } =
-    useContext(TodolistContext);
+  const {
+    deleteTask,
+    subtasks,
+    completedSubtask,
+    lists,
+    MoveTaskToAnotherList,
+  } = useContext(TodolistContext);
 
   // Filter subtasks based on taskId
   const filteredSubtasks = subtasks.filter(
@@ -83,11 +89,18 @@ export default function FormDialog({ task, list }) {
 
             <div className="lable-input-dialog">
               <label htmlFor="">Status</label>
-              <select className="Select-option-dialog" name="" id="">
+              <select
+                className="Select-option-dialog"
+                onChange={(e) =>
+                  MoveTaskToAnotherList(task._id, e.target.value)
+                }
+              >
                 <option value="--">--</option>
-                <option value="Todo">Todo</option>
-                <option value="Done">Done</option>
-                <option value="Doing">Doing</option>
+                {lists.map((list) => (
+                  <option key={list._id} value={list._id}>
+                    {list.title}
+                  </option>
+                ))}
               </select>
             </div>
           </form>

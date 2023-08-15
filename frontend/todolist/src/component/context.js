@@ -82,11 +82,14 @@ function TodolistProvider(props) {
         listId
       );
       // Create the associated subtask
-      const subtaskResponse = await axios.post(`/api/v1/todoTask/subtask`, {
-        taskId: taskResponse.data.task._id,
-        subtask,
-      });
-
+      if (subtask.length == 0) {
+        console.log("the sub task is not found");
+      } else {
+        const subtaskResponse = await axios.post(`/api/v1/todoTask/subtask`, {
+          taskId: taskResponse.data.task._id,
+          subtask,
+        });
+      }
       // Update the tasks state with the new task
       setTasks([...tasks, taskResponse.data.task]);
 
@@ -137,7 +140,23 @@ function TodolistProvider(props) {
     }
   };
 
+  //Move the task another list
+
+  // http://localhost:5000/api/v1/todotask/move/64daa73dc11b755c30f2eaf6
+
+  const MoveTaskToAnotherList = async (taskId, listId) => {
+    try {
+      const response = await axios.put(`/api/v1/todotask/move/${taskId}`, {
+        newListId: listId,
+      });
+      getTasks();
+      console.log(taskId, listId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   //-----Start Fetch subtask data from the API-----------------------------------------------------------------------------------
+
   // Get subtasks
   const Getsubtask = async () => {
     try {
@@ -166,6 +185,7 @@ function TodolistProvider(props) {
     subtask,
     UpdateTask,
     completedSubtask,
+    MoveTaskToAnotherList,
   };
 
   return (
